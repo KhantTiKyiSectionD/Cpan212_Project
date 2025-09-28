@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Boho Barkada Bistro</title>
+    <link href="/css/main.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+      body {
+        font-family: "Marcellus", "serif";
+      }
+      .FAQS,
+      .get-in-touch {
+        margin: 5%;
+      }
+      /* navbar.css */
+
+      #map {
+        height: 400px;
+        width: 70%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- navbar -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
+      <div class="container-fluid">
+        <a class="navbar-brand logo" href="index.html">
+          <img src="assets/updated-logo.png" alt="Boho Bistro Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">
+                Home
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about_us.html">
+                About Us
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="menu.html">
+                Menu
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html">
+                Reservation
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gallery.html">
+                Gallery
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                Contact Us
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="ms-3">
+      <p class="display-3 text-center">Contact Us</p>
+      <p class="lead-5 text-secondary text-center">
+        Get in touch with us to learn more about our bistro and offerings
+      </p>
+    </div>
+    <!-- Contact Info Section -->
+    <section class="contact-info">
+      <div class="container-fluid">
+        <div id="map" class="mx-auto"></div>
+        <div class="contact-details text-center">
+          <p class="lead-5 text-secondary">
+            <i class="fas fa-home mr-3 mt-3"></i> 1 Bay St, Toronto, ON, M1M
+            1M1, CA
+
+            <i class="fas fa-envelope mr-3"></i> info@gmail.com
+
+            <i class="fas fa-phone mr-3"></i> + 01 416 221 1221
+
+            <i class="fas fa-print mr-3"></i> + 01 416 221 2112
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacing"></div>
+
+    <section class="FAQS">
+      <div class="mx-3">
+        <div class="row">
+          <div class="col-md-5 col-sm-12 mb-5">
+            <p class="display-5">FAQs</p>
+            <p class="text-secondary lead-5">
+              Find answers to commonly asked questions about our bistro,
+              including our opening hours, parking availability, and special
+              accomodations.
+            </p>
+            <button class="btn btn-outline-secondary rounded-0">Contact</button>
+          </div>
+          <div class="col-md-7 col-sm-12">
+            <div class="card border mb-2">
+              <div class="card-body">
+                <h5 class="card-title text-primary">
+                  What are your opening hours?
+                </h5>
+                <p class="card-subtitle mb-2 text-secondary">
+                  Our Bistro is open from 9am to 10pm, Monday to Sunday. We are
+                  here to serve you throughout the day, offering
+                  breakfast,lunch, and dinner options.
+                </p>
+              </div>
+            </div>
+            <div class="card border mb-2">
+              <div class="card-body">
+                <h5 class="card-title text-primary">
+                  Do you offer vegetarian options?
+                </h5>
+                <p class="card-subtitle mb-2 text-secondary">
+                  Yes, we offer a variety of vegetarian and vegan options on our
+                  menu.
+                </p>
+              </div>
+            </div>
+            <div class="card border mb-2">
+              <div class="card-body">
+                <h5 class="card-title text-primary">
+                  Can I make a reservation online?
+                </h5>
+                <p class="card-subtitle mb-2 text-secondary">
+                  Yes, you can make a reservation through our website. Visit our
+                  reservation page for more details.
+                </p>
+              </div>
+            </div>
+            <div class="card border mb-2">
+              <div class="card-body">
+                <h5 class="card-title text-primary">
+                  Do you have special Accomodations?
+                </h5>
+                <p class="card-subtitle mb-2 text-secondary">
+                  Absolutely! We strive to provide a welcoming environment for
+                  all our guests. If you have any special requests or
+                  requirements, please let us know, we will do our best to
+                  accomodate you.
+                </p>
+              </div>
+            </div>
+            <div class="card border mb-2">
+              <div class="card-body">
+                <h5 class="card-title text-primary">Is parking available?</h5>
+                <p class="card-subtitle mb-2 text-secondary">
+                  Yes, we have parking available for our customers. There is a
+                  parking lot located next to the bistro, making it convenient
+                  for you to dine with us
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacing"></div>
+    <div class="spacing"></div>
+
+    <section class="get-in-touch">
+      <div class="container-lg mx-5"></div>
+      <div class="row mx-3">
+        <div class="col-6">
+          <div class="form">
+            <div class="mt-5">
+              <p class="display-5">Get in Touch</p>
+              <p class="lead-5 text-secondary">
+                We would love to hear from you! Please fill out the form below
+              </p>
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    class="form-control small-input"
+                    id="name"
+                    placeholder=""
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control small-input"
+                    id="email"
+                    placeholder=""
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea
+                    class="form-control small-input"
+                    id="message"
+                    rows="4"
+                    placeholder="Enter your message..."
+                  ></textarea>
+                </div>
+                <div class="form-check mb-3">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="agree"
+                  />
+                  <label class="form-check-label" for="agree">
+                    I agree to the Terms
+                  </label>
+                </div>
+                <button type="submit" class="btn btn-secondary rounded-0">
+                  Send
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <img
+            src="assets/landing-7.jpg"
+            class="card-img-top img-sizing-large"
+          />
+        </div>
+      </div>
+    </section>
+
+    <div class="spacing"></div>
+
+    <footer class="footer text-center text-lg-start text-white">
+      <div class="container p-4 pb-0">
+        <section class="">
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">
+                Boho Barkada
+              </h6>
+              <p class="text-white">
+                Is your escape to a world of bohemian charm and warm
+                camaraderie. Experience the perfect blend of artistic flair,
+                delicious food, and genuine connections.
+              </p>
+
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-facebook-f text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-twitter text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-google text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1 text-white"
+                role="button"
+                ><i class="fab fa-instagram text-white"></i
+              ></a>
+            </div>
+
+            <div class="col-md-6">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">
+                Contact
+              </h6>
+              <p class="text-white">
+                <i class="fas fa-home mr-3"></i> 1 Bay St, Toronto, ON, M1M 1M1,
+                CA
+              </p>
+              <p class="text-white">
+                <i class="fas fa-envelope mr-3"></i> info@gmail.com
+              </p>
+              <p class="text-white">
+                <i class="fas fa-print mr-3"></i> + 01 416 221 2112
+              </p>
+            </div>
+          </div>
+        </section>
+        <hr class="my-3" />
+
+        <section class="p-3 pt-0">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8 text-center">
+              <p class="p-3 text-white">© 2024 Copyright: Boho-Barkada</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+      var map = L.map("map").setView([51.505, -0.09], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+      }).addTo(map);
+
+      // Handle active state of navbar links
+      document
+        .querySelectorAll(".navbar-nav .nav-link")
+        .forEach(function (link) {
+          link.addEventListener("click", function () {
+            document
+              .querySelectorAll(".navbar-nav .nav-link")
+              .forEach(function (link) {
+                link.classList.remove("active");
+              });
+            this.classList.add("active");
+          });
+        });
+    </script>
+  </body>
+</html>

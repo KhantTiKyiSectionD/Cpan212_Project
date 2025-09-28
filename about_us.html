@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link href="/css/main.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Marcellus", serif;
+      }
+
+      .slide-left {
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: transform 1s ease-out, opacity 1s ease-out;
+      }
+
+      .slide-right {
+        opacity: 0;
+        transform: translateX(100%);
+        transition: transform 1s ease-out, opacity 1s ease-out;
+      }
+
+      .visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- navbar -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
+      <div class="container-fluid">
+        <a class="navbar-brand logo" href="index.html">
+          <img src="assets/updated-logo.png" alt="Boho Bistro Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">
+                Home
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                About Us
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="menu.html">
+                Menu
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html">
+                Reservation
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gallery.html">
+                Gallery
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact_us.html">
+                Contact Us
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section class="intro">
+      <div class="container-md">
+        <p class="display-5 text-center">Our Story</p>
+        <p class="lead text-secondary">
+          Boho Barkada was born out of an idea conceived by two chefs who met
+          while attending Humber College in Toronto, Canada. Mateo DaVinci and
+          Colette Cortez crossed paths in culinary school and formed an instant
+          bond over their shared passion for cooking. After graduation, both
+          chefs decided to embark on separate journeys, traveling the world to
+          learn from master chefs and explore diverse culinary traditions. These
+          experiences enriched their skills and broadened their horizons,
+          fueling their dream to one day open a unique dining establishment
+          together.
+        </p>
+        <p class="lead text-secondary">
+          Upon returning to Toronto, Mateo and Colette reunited to turn their
+          dream into reality. They chose Toronto as the location for Boho
+          Barkada Bistro because of its vibrant, multicultural atmosphere and
+          thriving food scene. The city’s dynamic and diverse population,
+          combined with its reputation for embracing innovative dining concepts,
+          made it the perfect setting for their urban rustic haven.
+        </p>
+        <p class="lead text-secondary">
+          Boho Barkada Bistro is set to be Toronto's next urban rustic haven,
+          blending the artistic, free-spirited essence of the Boho lifestyle
+          with the camaraderie and warmth of a Barkada—a close-knit group of
+          friends. This concept marries the charm of an informal French bistro
+          with an inviting atmosphere that celebrates creativity, friendship,
+          and community. Boho Barkada Bistro embodies the Boho spirit, appealing
+          to Toronto's vibrant and diverse artistic community. It's a place
+          where creative minds can gather, express themselves, and find
+          inspiration. In a bustling city like Toronto, providing a space where
+          people can connect and feel a sense of belonging is invaluable. The
+          bistro ensures a relaxed, yet sophisticated dining experience,
+          offering high-quality food and drinks in a laid-back setting. The
+          blend of Boho artistry, the friendly Barkada vibe, and the casual
+          sophistication of a bistro creates a unique and memorable environment
+          that stands out in Toronto's dining scene.
+        </p>
+        <div class="spacing"></div>
+
+        <p class="text-muted text-center">Meet Our Executive Chefs</p>
+        <h2 class="display-5 text-center">Chef Mateo DaVinci</h2>
+        <p class="lead text-secondary">
+          Born to Italian immigrant parents, Mateo found joy in cooking at an
+          early age, learning the culinary arts from his beloved nonna. His
+          Italian heritage and global culinary experiences inspire his
+          creations, infusing traditional techniques with contemporary flair.
+        </p>
+        <div class="row gx-2 gx-lg-3">
+          <div class="col-6">
+            <div class="mb-2">
+              <img
+                class="card-img-top img-sizing-small slide-left"
+                src="https://reportergourmet.com/upload/chef/324/d_metullio-news-970-copertina_2023-05-08_11-32-34.jpg"
+                alt="Chef Mateo DaVinci Image 1"
+              />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-2">
+              <img
+                class="card-img-top img-sizing-small slide-right"
+                src="https://harrystrieste.it/wp-content/uploads/2023/11/Espressione-dellanima.jpg"
+                alt="Chef Mateo DaVinci Image 2"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="spacing"></div>
+        <h2 class="display-5 text-center">Chef Colette Cortez</h2>
+        <p class="lead text-secondary">
+          With French and Spanish parentage, Colette thrived from a young age in
+          the kitchen. Her creativity and passion for culinary arts led her to
+          experiment with bold flavors and innovative presentations, making her
+          dishes both visually stunning and delectable.
+        </p>
+        <p class="lead text-secondary">
+          Together, Mateo and Colette bring their rich cultural backgrounds,
+          extensive travels, and deep friendship to Boho Barkada Bistro,
+          creating a dining experience that is as unique and memorable as their
+          journey.
+        </p>
+
+        <div class="row gx-2 gx-lg-3">
+          <div class="col-6">
+            <div class="mb-2">
+              <img
+                class="card-img-top img-sizing-small slide-left"
+                src="https://img.freepik.com/premium-photo/woman-standing-restaurant-with-her-arms-crossed-observing-her-surroundings-photo-female-chef-restaurant-ai-generated_538213-16719.jpg"
+                alt="Chef Colette Cortez Image 1"
+              />
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-2">
+              <img
+                class="card-img-top img-sizing-small slide-right"
+                src="https://static.vecteezy.com/system/resources/previews/035/756/557/large_2x/ai-generated-young-female-chef-preparing-food-in-the-kitchen-of-a-restaurant-or-hotel-a-female-chef-in-the-kitchen-ai-generated-free-photo.jpg"
+                alt="Chef Colette Cortez Image 2"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="spacing"></div>
+
+    <footer class="footer text-center text-lg-start text-white">
+      <div class="container p-4 pb-0">
+        <section class="">
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">
+                Boho Barkada
+              </h6>
+              <p class="text-white">
+                Is your escape to a world of bohemian charm and warm
+                camaraderie. Experience the perfect blend of artistic flair,
+                delicious food, and genuine connections.
+              </p>
+
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-facebook-f text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-twitter text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-google text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1 text-white"
+                role="button"
+                ><i class="fab fa-instagram text-white"></i
+              ></a>
+            </div>
+
+            <div class="col-md-6">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">
+                Contact
+              </h6>
+              <p class="text-white">
+                <i class="fas fa-home mr-3"></i> 1 Bay St, Toronto, ON, M1M 1M1,
+                CA
+              </p>
+              <p class="text-white">
+                <i class="fas fa-envelope mr-3"></i> info@gmail.com
+              </p>
+              <p class="text-white">
+                <i class="fas fa-print mr-3"></i> + 01 416 221 2112
+              </p>
+            </div>
+          </div>
+        </section>
+        <hr class="my-3" />
+
+        <section class="p-3 pt-0">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8 text-center">
+              <p class="p-3 text-white">© 2024 Copyright: Boho-Barkada</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const observerOptions = {
+          root: null,
+          rootMargin: "0px",
+          threshold: 0.1,
+        };
+
+        const observerCallback = (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        };
+
+        const observer = new IntersectionObserver(
+          observerCallback,
+          observerOptions
+        );
+
+        const images = document.querySelectorAll(".slide-left, .slide-right");
+        images.forEach((image) => observer.observe(image));
+      });
+    </script>
+  </body>
+</html>

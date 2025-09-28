@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Reservation - Boho Bistro</title>
+    <link href="/css/main.min.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Marcellus", serif;
+      }
+
+      .intro,
+      .main-1,
+      .main-2 {
+        padding: 2rem 0;
+      }
+
+      /* New styles for roll-down animation in reservation section */
+      @keyframes rollDown {
+        0% {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .reservation {
+        padding: 2rem 0;
+        opacity: 0;
+        /* Start invisible */
+        animation: rollDown 0.6s ease forwards;
+        /* Apply the animation */
+      }
+
+      .instructions,
+      .faq {
+        padding: 2rem 0;
+        margin-top: 15px;
+      }
+
+      .instruction-step {
+        display: inline-block;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        padding-right: 10px;
+        margin-left: 10px;
+      }
+
+      .instruction-step i {
+        font-size: 2rem;
+        margin-right: 1rem;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- navbar -->
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
+      <div class="container-fluid">
+        <a class="navbar-brand logo" href="#">
+          <img src="assets/updated-logo.png" alt="Boho Bistro Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-center"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">
+                Home
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about_us.html">
+                About Us
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="menu.html">
+                Menu
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reservation.html">
+                Reservation
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="gallery.html">
+                Gallery
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact_us.html">
+                Contact Us
+                <svg viewBox="0 0 100 50">
+                  <ellipse cx="50" cy="25" rx="45" ry="20"></ellipse>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- RESERVATION SECTION -->
+    <section class="reservation">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <p class="text-center mb-4 display-5">Make a Reservation</p>
+            <form id="reservationForm">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" required />
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" class="form-control" id="phone" required />
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">Date</label>
+                <input type="date" class="form-control" id="date" required />
+              </div>
+              <div class="mb-3">
+                <label for="time" class="form-label">Time</label>
+                <input type="time" class="form-control" id="time" required />
+              </div>
+              <div class="mb-3">
+                <label for="people" class="form-label">Number of People</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="people"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-outline-primary rounded-0">
+                Submit
+              </button>
+            </form>
+            <div id="notification" class="mt-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INSTRUCTIONS SECTION -->
+    <section class="instructions mt-5">
+      <div class="container">
+        <p class="text-center mb-4 display-5">How to Make a Reservation</p>
+        <p></p>
+        <p></p>
+        <div class="row">
+          <div class="col">
+            <div class="instruction-step">
+              <i class="bi bi-pencil-square"></i>
+              <h5>Step 1: Fill the Reservation Form</h5>
+              <p>Complete the reservation form above with your details.</p>
+            </div>
+          </div>
+          <div class="col">
+            <div class="instruction-step">
+              <i class="bi bi-envelope"></i>
+              <div>
+                <h5>Step 2: Email Confirmation</h5>
+                <p>Check your email for a confirmation message from us.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="instruction-step">
+              <i class="bi bi-calendar-check"></i>
+              <div>
+                <h5>Step 3: Enjoy Your Dining Experience</h5>
+                <p>
+                  Visit Boho Bistro on the reserved date and time and enjoy your
+                  meal!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacing"></div>
+    <footer class="footer text-center text-lg-start text-white">
+      <div class="container p-4 pb-0">
+        <section class="">
+          <div class="row">
+            <div class="col-md-6">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">
+                Boho Barkada
+              </h6>
+              <p class="text-white">
+                Is your escape to a world of bohemian charm and warm
+                camaraderie. Experience the perfect blend of artistic flair,
+                delicious food, and genuine connections.
+              </p>
+
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-facebook-f text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-twitter text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1"
+                class="text-white"
+                role="button"
+                ><i class="fab fa-google text-white"></i
+              ></a>
+              <a
+                class="btn btn-outline-light btn-floating m-1 text-white"
+                role="button"
+                ><i class="fab fa-instagram text-white"></i
+              ></a>
+            </div>
+
+            <div class="col-md-6">
+              <h6 class="text-uppercase mb-4 font-weight-bold text-white">
+                Contact
+              </h6>
+              <p class="text-white">
+                <i class="fas fa-home mr-3"></i> 1 Bay St, Toronto, ON, M1M 1M1,
+                CA
+              </p>
+              <p class="text-white">
+                <i class="fas fa-envelope mr-3"></i> info@gmail.com
+              </p>
+              <p class="text-white">
+                <i class="fas fa-print mr-3"></i> + 01 416 221 2112
+              </p>
+            </div>
+          </div>
+        </section>
+        <hr class="my-3" />
+
+        <section class="p-3 pt-0">
+          <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8 text-center">
+              <p class="p-3 text-white">© 2024 Copyright: Boho-Barkada</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </footer>
+
+    <!-- MODAL -->
+    <div
+      class="modal fade"
+      id="cancellationPolicyModal"
+      tabindex="-1"
+      aria-labelledby="cancellationPolicyModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cancellationPolicyModalLabel">
+              Cancellation Policy
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>Our cancellation policy is as follows:</p>
+            <ul>
+              <li>Cancellations must be made at least 24 hours in advance.</li>
+              <li>
+                Failure to cancel within this period will result in a charge.
+              </li>
+              <li>For large groups, a deposit may be required.</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.js"
+    ></script>
+    <script>
+      document
+        .getElementById("reservationForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the form from submitting the traditional way
+
+          // Collect form data
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const phone = document.getElementById("phone").value;
+          const date = document.getElementById("date").value;
+          const time = document.getElementById("time").value;
+          const people = document.getElementById("people").value;
+
+          // Show a notification message
+          const notification = document.getElementById("notification");
+          notification.innerHTML = `
+          <div class="alert alert-success" role="alert">
+            Thank you, ${name}! Your reservation for ${people} people on ${date} at ${time} has been received. We will send a confirmation to ${email}.
+          </div>
+        `;
+
+          // Show the modal with the cancellation policy
+          var cancellationPolicyModal = new bootstrap.Modal(
+            document.getElementById("cancellationPolicyModal")
+          );
+          cancellationPolicyModal.show();
+
+          // Optionally, you can clear the form fields
+          document.getElementById("reservationForm").reset();
+        });
+
+      document
+        .querySelectorAll(".navbar-nav .nav-link")
+        .forEach(function (link) {
+          link.addEventListener("click", function () {
+            document
+              .querySelectorAll(".navbar-nav .nav-link")
+              .forEach(function (link) {
+                link.classList.remove("active");
+              });
+            this.classList.add("active");
+          });
+        });
+    </script>
+  </body>
+</html>
