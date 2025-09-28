@@ -1,20 +1,28 @@
-# Boho Barkada Bistro Website - README
+# 🍽️ Boho Bistro Web App
+Groupmates:
+Aliana Santos (N01649330)
+Khant Ti Kyi (N01709727)
 
-## Welcome to the Digital Haven of Boho Barkada Bistro!
+Boho Bistro is a restaurant website project that was originally built with static **HTML, CSS, and Bootstrap**.  
+We are converting it into a **React.js frontend** with a **Node.js + Express backend** to make it more dynamic and modular.
 
-This project is dedicated to crafting the official website for Boho Barkada Bistro, Toronto's soon-to-be urban rustic haven. Our aim is to build a vibrant online space that captures the essence of the bistro: a delightful fusion of bohemian spirit, the warmth of close friendships ("Barkada"), and a love for delectable food.
+---
 
-## A Glimpse into our Digital Bistro:
+## 🚀 Features
+- React frontend with multiple pages (`Home`, `Menu`, `Reservation`, `Contact Us`)
+- Node.js + Express backend serving API routes
+- Dummy API endpoints for menu items and reservations
+- Responsive design using Bootstrap
 
-- **Bohemian Flair:** The website's design will embrace a bohemian aesthetic, incorporating artistic elements that mirror the bistro's unique theme.
-- **Community Corner:** We'll cultivate a sense of belonging by showcasing photos and stories that celebrate friendship and connection.
-- **Culinary Delights on Display:** Mouthwatering food photography and a clear menu will entice visitors and showcase the bistro's culinary offerings.
-- **User-Friendly Experience:** A user-friendly interface will ensure easy navigation, with online reservation capabilities (if desired) and clear contact information.
+---
 
-## Let's Build Something Special!
+## 📡 API Endpoints
+- `GET /api/menu-items` → Returns a list of menu items (dummy data)  
+- `POST /api/reservation` → Accepts reservation details (dummy response)  
 
-This repository serves as the foundation for the Boho Barkada Bistro website. Feel free to use it for:
+---
 
-- **Codebase:** This repository will store the website's code, ensuring organized development and version control.
-- **Design Assets:** Logos, images, and other design elements will be housed here for easy access and reference.
-- **Communication:** Utilize the issue tracker for discussions, suggestions, and bug reporting.
+## 🛠️ How to Run
+1. Clone repo and install dependencies:
+   ```bash
+   npm install
