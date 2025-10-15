@@ -4,7 +4,6 @@ const SECTIONS = ['starters', 'appetizers', 'foods', 'drinks']
 
 export default function Menu() {
   useEffect(() => {
-    // mimic the fade-in you had
     const el = document.querySelector('.menu-container')
     if (el) el.style.opacity = '1'
   }, [])
@@ -41,7 +40,12 @@ export default function Menu() {
 
         <div className="tabs">
           {SECTIONS.map((sec) => (
-            <div key={sec} className={`tab ${active === sec ? 'active' : ''}`} onClick={() => setActive(sec)} data-tab={sec}>
+            <div
+              key={sec}
+              className={`tab ${active === sec ? 'active' : ''}`}
+              onClick={() => setActive(sec)}
+              data-tab={sec}
+            >
               {sec.charAt(0).toUpperCase() + sec.slice(1)}
             </div>
           ))}
@@ -62,7 +66,9 @@ export default function Menu() {
               ['Gazpacho','Chilled tomato soup with a touch of basil.',12],
             ].map(([name,desc,price])=>(
               <div className="menu-item" key={name}>
-                <h4>{name}</h4><p>{desc}</p><span className="price">${price}</span>
+                <h4>{name}</h4>
+                <p>{desc}</p>
+                <span className="price">${price}</span>
               </div>
             ))}
           </div>
@@ -83,7 +89,9 @@ export default function Menu() {
               ['Goat Cheese Tart','With caramelized onions and thyme.',14],
             ].map(([name,desc,price])=>(
               <div className="menu-item" key={name}>
-                <h4>{name}</h4><p>{desc}</p><span className="price">${price}</span>
+                <h4>{name}</h4>
+                <p>{desc}</p>
+                <span className="price">${price}</span>
               </div>
             ))}
           </div>
@@ -104,7 +112,9 @@ export default function Menu() {
               ['Chicken Alfredo','Creamy alfredo sauce with grilled chicken.',22],
             ].map(([name,desc,price])=>(
               <div className="menu-item" key={name}>
-                <h4>{name}</h4><p>{desc}</p><span className="price">${price}</span>
+                <h4>{name}</h4>
+                <p>{desc}</p>
+                <span className="price">${price}</span>
               </div>
             ))}
           </div>
@@ -125,7 +135,9 @@ export default function Menu() {
               ['Ursus','Romanian pale lager with a crisp, refreshing finish.',10],
             ].map(([name,desc,price])=>(
               <div className="menu-item" key={name}>
-                <h4>{name}</h4><p>{desc}</p><span className="price">${price}</span>
+                <h4>{name}</h4>
+                <p>{desc}</p>
+                <span className="price">${price}</span>
               </div>
             ))}
           </div>
