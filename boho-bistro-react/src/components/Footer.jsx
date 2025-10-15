@@ -1,71 +1,58 @@
-import { NavLink, Link } from 'react-router-dom'
-
-export default function Navbar() {
+export default function Footer() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
-      <div className="container-fluid">
-        <Link className="navbar-brand logo" to="/">
-          <img src="/assets/updated-logo.png" alt="Boho Bistro Logo" />
-        </Link>
+    <footer className="footer text-center text-lg-start text-white">
+      <div className="container p-4 pb-0">
+        <section>
+          <div className="row">
+            <div className="col-md-6">
+              <h6 className="text-uppercase mb-4 font-weight-bold text-white">
+                Boho Barkada
+              </h6>
+              <p className="text-white">
+                Is your escape to a world of bohemian charm and warm camaraderie.
+                Experience the perfect blend of artistic flair, delicious food, and
+                genuine connections.
+              </p>
 
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+              <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
+                <i className="fab fa-facebook-f text-white"></i>
+              </a>
+              <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
+                <i className="fab fa-twitter text-white"></i>
+              </a>
+              <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
+                <i className="fab fa-google text-white"></i>
+              </a>
+              <a className="btn btn-outline-light btn-floating m-1 text-white" role="button">
+                <i className="fab fa-instagram text-white"></i>
+              </a>
+            </div>
 
-        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/">
-                Home
-                <svg viewBox="0 0 100 50"><ellipse cx="50" cy="25" rx="45" ry="20"></ellipse></svg>
-              </NavLink>
-            </li>
+            <div className="col-md-6">
+              <h6 className="text-uppercase mb-4 font-weight-bold text-white">Contact</h6>
+              <p className="text-white">
+                <i className="fas fa-home mr-3"></i> 1 Bay St, Toronto, ON, M1M 1M1, CA
+              </p>
+              <p className="text-white">
+                <i className="fas fa-envelope mr-3"></i> info@gmail.com
+              </p>
+              <p className="text-white">
+                <i className="fas fa-print mr-3"></i> + 01 416 221 2112
+              </p>
+            </div>
+          </div>
+        </section>
 
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/about">
-                About Us
-                <svg viewBox="0 0 100 50"><ellipse cx="50" cy="25" rx="45" ry="20"></ellipse></svg>
-              </NavLink>
-            </li>
+        <hr className="my-3" />
 
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/menu">
-                Menu
-                <svg viewBox="0 0 100 50"><ellipse cx="50" cy="25" rx="45" ry="20"></ellipse></svg>
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/reservation">
-                Reservation
-                <svg viewBox="0 0 100 50"><ellipse cx="50" cy="25" rx="45" ry="20"></ellipse></svg>
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/gallery">
-                Gallery
-                <svg viewBox="0 0 100 50"><ellipse cx="50" cy="25" rx="45" ry="20"></ellipse></svg>
-              </NavLink>
-            </li>
-
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/contact">
-                Contact Us
-                <svg viewBox="0 0 100 50"><ellipse cx="50" cy="25" rx="45" ry="20"></ellipse></svg>
-              </NavLink>
-            </li>
-          </ul>
-        </div>
+        <section className="p-3 pt-0">
+          <div className="row d-flex align-items-center">
+            <div className="col-md-7 col-lg-8 text-center">
+              <p className="p-3 text-white">© {new Date().getFullYear()} Copyright: Boho-Barkada</p>
+            </div>
+          </div>
+        </section>
       </div>
-    </nav>
-  )
+    </footer>
+  );
 }
