@@ -1,36 +1,58 @@
 import express from 'express';
 import cors from 'cors';
-import menuItemRoutes from './modules/menu-items/routes/menuItemRoutes.js';
 
 const app = express();
-const PORT = 3001;
+const PORT = 3002;
 
-// Middlewares
+// Basic middlewares
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.use('/api/menu-items', menuItemRoutes);
+// Simple request logger
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
+
+// Test route
+app.get('/test', (req, res) => {
+  console.log('✅ TEST ROUTE CALLED!');
+  res.json({ 
+    success: true, 
+    message: 'Server is working!' 
+  });
+});
+
+// Import menu routes
+try {
+  const menuItemRoutes = await import('./modules/menu-items/routes/menuItemRoutes.js');
+  app.use('/api/menu-items', menuItemRoutes.default);
+  console.log('✅ Menu routes loaded successfully');
+} catch (error) {
+  console.error('❌ Error loading menu routes:', error.message);
+}
 
 // Root route
 app.get('/', (req, res) => {
   res.json({ 
     success: true, 
-    message: 'Boho Bistro API is running!',
-    endpoints: {
-      menu: {
-        allItems: 'GET /api/menu-items',
-        byCategory: 'GET /api/menu-items/category/:category',
-        byId: 'GET /api/menu-items/:id',
-        create: 'POST /api/menu-items',
-        update: 'PUT /api/menu-items/:id', 
-        delete: 'DELETE /api/menu-items/:id'
-      }
-    }
+    message: 'Boho Bistro API is running!' 
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route not found: ${req.method} ${req.path}`
   });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Boho Bistro API running on http://localhost:${PORT}`);
+  console.log(`🚀 Server started on http://localhost:${PORT}`);
+  console.log('📍 Test endpoints:');
+  console.log('   - http://localhost:3002/test');
+  console.log('   - http://localhost:3002/api/menu-items');
+  console.log('   - http://localhost:3002/api/menu-items/category/starters');
 });
