@@ -1,0 +1,31 @@
+[
+  {
+    "id": 1,
+    "name": "Seared Scallops",
+    "description": "With pea purée and crispy pancetta.",
+    "price": 18.00,
+    "category": "starters",
+    "image": "/images/seared-scallops.jpg",
+    "isVegetarian": false,
+    "isVegan": false,
+    "isGlutenFree": true,
+    "allergens": ["shellfish"],
+    "rating": 4.5,
+    "prepTime": 15
+  },
+  {
+    "id": 2,
+    "name": "Foie Gras",
+    "description": "Served with fig jam and toasted brioche.",
+    "price": 22.00,
+    "category": "starters",
+    "image": "/images/foie-gras.jpg",
+    "isVegetarian": false,
+    "isVegan": false,
+    "isGlutenFree": false,
+    "allergens": ["gluten"],
+    "rating": 4.7,
+    "prepTime": 10
+  }
+  // ... (all 36 menu items from your React code)
+]
