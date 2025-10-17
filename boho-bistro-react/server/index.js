@@ -31,7 +31,13 @@ try {
 } catch (error) {
   console.error('❌ Error loading menu routes:', error.message);
 }
-
+try {
+  const reservationRoutes = await import('./modules/reservations/routes/reservationRoutes.js');
+  app.use('/api/reservations', reservationRoutes.default);
+  console.log('✅ Reservation routes loaded successfully');
+} catch (error) {
+  console.error('❌ Error loading reservation routes:', error.message);
+}
 // Root route
 app.get('/', (req, res) => {
   res.json({ 
