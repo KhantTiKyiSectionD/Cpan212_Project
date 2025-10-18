@@ -42,7 +42,7 @@ try {
 app.get('/', (req, res) => {
   res.json({ 
     success: true, 
-    message: 'Boho Bistro API is running!' 
+    message: 'Boho Bistro API is runningg!' 
   });
 });
 try {
