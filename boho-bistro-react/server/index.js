@@ -45,7 +45,13 @@ app.get('/', (req, res) => {
     message: 'Boho Bistro API is running!' 
   });
 });
-
+try {
+  const contactRoutes = await import('./modules/contacts/routes/contactRoutes.js');
+  app.use('/api/contacts', contactRoutes.default);
+  console.log('✅ Contact routes loaded successfully');
+} catch (error) {
+  console.error('❌ Error loading contact routes:', error.message);
+}
 // 404 handler
 app.use((req, res) => {
   res.status(404).json({
