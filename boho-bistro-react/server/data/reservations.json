@@ -14,7 +14,7 @@
   {
     "id": 2,
     "name": "Maria Garcia",
-    "email": "maria.garcia@email.com", 
+    "email": "maria.garcia@email.com",
     "phone": "+14162211222",
     "date": "2024-12-16",
     "time": "18:30",
@@ -22,5 +22,16 @@
     "status": "confirmed",
     "specialRequests": "Vegetarian preferences",
     "createdAt": "2024-10-11T10:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "John Smith",
+    "email": "john@email.com",
+    "phone": "416-123-4567",
+    "date": "2024-12-25",
+    "time": "19:30",
+    "people": 4,
+    "status": "confirmed",
+    "createdAt": "2025-10-18T01:12:53.889Z"
   }
 ]

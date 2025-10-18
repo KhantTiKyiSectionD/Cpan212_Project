@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Emily Wilson",
+    "email": "emily.wilson@email.com",
+    "message": "I wanted to inquire about hosting a private event at your bistro. We're planning a birthday party for about 20 people next month.",
+    "subject": "Private Event Inquiry",
+    "createdAt": "2024-10-10T09:15:00.000Z",
+    "status": "new"
+  },
+  {
+    "id": 2,
+    "name": "Robert Taylor",
+    "email": "robert.t@email.com", 
+    "message": "Do you offer gluten-free options for your pasta dishes? My daughter has celiac disease and we'd love to visit your restaurant.",
+    "subject": "Dietary Requirements",
+    "createdAt": "2024-10-11T14:20:00.000Z",
+    "status": "responded"
+  }
+]
