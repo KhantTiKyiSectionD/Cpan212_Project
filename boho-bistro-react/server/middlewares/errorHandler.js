@@ -56,4 +56,4 @@ const errorHandler = (err, req, res, next) => {
   });
 };
 
-export default err
+export default errorHandler;

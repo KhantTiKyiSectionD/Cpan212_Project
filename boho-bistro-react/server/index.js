@@ -78,7 +78,7 @@ app.use('*', (req, res) => {
 });
 
 // Global error handler
-import errorHandler from './modules/utils/errorHandler.js';
+import errorHandler from './middlewares/errorHandler.js';
 app.use(errorHandler);
 
 // ======================
