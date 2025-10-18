@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Enhanced request logger
 app.use((req, res, next) => {
-  console.log(${new Date().toISOString()} - ${req.method} ${req.path});
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
 
@@ -22,10 +22,7 @@ app.use((req, res, next) => {
 
 // Test route
 app.get('/test', (req, res) => {
-  res.json({ 
-    success: true, 
-    message: 'Server is working!' 
-  });
+  res.json({ success: true, message: 'Server is working!' });
 });
 
 // Import and use menu routes
@@ -57,12 +54,12 @@ try {
 
 // Root route
 app.get('/', (req, res) => {
-  res.json({ 
-    success: true, 
+  res.json({
+    success: true,
     message: 'Boho Bistro API is running!',
     endpoints: {
       menu: '/api/menu-items',
-      reservations: '/api/reservations', 
+      reservations: '/api/reservations',
       contacts: '/api/contacts'
     }
   });
@@ -76,44 +73,31 @@ app.get('/', (req, res) => {
 app.use('*', (req, res) => {
   res.status(404).json({
     success: false,
-    message: Route not found: ${req.method} ${req.originalUrl}
+    message: `Route not found: ${req.method} ${req.originalUrl}`
   });
 });
 
 // Global error handler
-app.use((error, req, res, next) => {
-  console.error('Error:', error);
-
-  let statusCode = error.statusCode || 500;
-  let message = error.message || 'Internal Server Error';
-
-  res.status(statusCode).json({
-    success: false,
-    message: message
-  });
-});
+import errorHandler from './modules/utils/errorHandler.js';
+app.use(errorHandler);
 
 // ======================
 // SERVER START
 // ======================
 app.listen(PORT, () => {
-  console.log(🚀 Boho Bistro API Server Started);
-  console.log(📍 Port: ${PORT});
-  console.log(🌐 URL: http://localhost:${PORT});
-  console.log('');
+  console.log(`🚀 Boho Bistro API Server Started`);
+  console.log(`📍 Port: ${PORT}`);
+  console.log(`🌐 URL: http://localhost:${PORT}\n`);
   console.log('📋 Available Endpoints:');
   console.log('   GET  /api/menu-items');
   console.log('   GET  /api/menu-items/category/:category');
-  console.log('   GET  /api/menu-items/:id');
-  console.log('');
+  console.log('   GET  /api/menu-items/:id\n');
   console.log('   GET  /api/reservations');
   console.log('   POST /api/reservations');
-  console.log('   GET  /api/reservations/:id');
-  console.log('');
+  console.log('   GET  /api/reservations/:id\n');
   console.log('   GET  /api/contacts');
   console.log('   POST /api/contacts');
-  console.log('   GET  /api/contacts/:id');
-  console.log('');
+  console.log('   GET  /api/contacts/:id\n');
   console.log('⏰ Server ready!');
 });
 

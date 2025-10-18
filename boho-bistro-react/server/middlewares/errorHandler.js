@@ -1,46 +1,59 @@
 import AppError from '../utils/AppError.js';
 
 const errorHandler = (err, req, res, next) => {
+  // Create a safe error object
   let error = { ...err };
-  error.message = err.message;
+  error.message = err.message || 'Something went wrong';
+  error.statusCode = err.statusCode || 500;
 
-  // Log to console for dev
-  console.log('Error Stack:', err.stack);
-  console.log('Error Details:', err);
+  // Log detailed errors in development only
+  if (process.env.NODE_ENV !== 'production') {
+    console.error('🔥 Error Stack:', err.stack);
+    console.error('🧩 Error Details:', err);
+  }
 
-  // Mongoose/ObjectId Cast Error
+  // -------------------------
+  // Specific error handlers
+  // -------------------------
+
+  // Mongoose invalid ObjectId
   if (err.name === 'CastError') {
-    const message = 'Resource not found';
-    error = new AppError(message, 404);
+    error = new AppError('Resource not found', 404);
   }
 
-  // Mongoose duplicate key
+  // Duplicate key
   if (err.code === 11000) {
-    const message = 'Duplicate field value entered';
-    error = new AppError(message, 400);
+    error = new AppError('Duplicate field value entered', 400);
   }
 
-  // Mongoose validation error
+  // Validation error
   if (err.name === 'ValidationError') {
-    const message = Object.values(err.errors).map(val => val.message).join(', ');
+    const message = Object.values(err.errors)
+      .map(val => val.message)
+      .join(', ');
     error = new AppError(message, 400);
   }
 
-  // JSON parse error
+  // Invalid JSON
   if (err.type === 'entity.parse.failed') {
-    const message = 'Invalid JSON in request body';
-    error = new AppError(message, 400);
+    error = new AppError('Invalid JSON in request body', 400);
   }
 
-  // Send error response
-  res.status(error.statusCode || 500).json({
+  // -------------------------
+  // Response
+  // -------------------------
+  res.status(error.statusCode).json({
     success: false,
-    message: error.message || 'Server Error',
+    message: error.message,
     ...(process.env.NODE_ENV === 'development' && {
-      stack: error.stack,
-      error: error
+      stack: err.stack,
+      error: {
+        name: err.name,
+        code: err.code,
+        details: err.errors || null
+      }
     })
   });
 };
 
-export default errorHandler;
+export default err
