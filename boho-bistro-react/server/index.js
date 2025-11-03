@@ -1,5 +1,9 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
+dotenv.config();
+import connectDb from './middlewares/connect-db.js';
+
 
 const app = express();
 const PORT = 3002;
@@ -96,9 +100,13 @@ app.use((error, req, res, next) => {
 // ======================
 // SERVER START
 // ======================
+connectDb().then(() => {
 app.listen(PORT, () => {
   console.log('Server started on http://localhost:3002');
+  console.log('✅ MongoDB connected');
+
   console.log('All routes loaded successfully!');
+});
 });
 
 export default app;
