@@ -1,12 +1,5 @@
-import express from 'express';
-import {
-  getAllReservations,
-  getReservationByID,
-  addNewReservation,
-  updateReservation,
-  deleteReservation,
-  getReservationsByDate
-} from '../models/reservationModel.js';
+import Reservation from '../models/reservationModel.js';
+
 import {
   validateCreateReservation,
   validateID,
@@ -18,7 +11,7 @@ const router = express.Router();
 // GET /api/reservations - Get all reservations
 router.get('/', (req, res) => {
   try {
-    const reservations = getAllReservations();
+      const reservations = await Reservation.find({});
     res.status(200).json({
       success: true,
       data: reservations,
@@ -38,7 +31,7 @@ router.get('/', (req, res) => {
 router.get('/date/:date', (req, res) => {
   try {
     const { date } = req.params;
-    const reservations = getReservationsByDate(date);
+    const reservations = await Reservation.find({ date });
     
     res.status(200).json({
       success: true,
@@ -60,7 +53,7 @@ router.get('/date/:date', (req, res) => {
 router.get('/:id', validateID, handleValidationErrors, (req, res) => {
   try {
     const { id } = req.params;
-    const reservation = getReservationByID(id);
+    const reservation = await Reservation.findById(id);
     
     if (!reservation) {
       return res.status(404).json({
@@ -86,7 +79,7 @@ router.get('/:id', validateID, handleValidationErrors, (req, res) => {
 // POST /api/reservations - Create new reservation
 router.post('/', validateCreateReservation, handleValidationErrors, (req, res) => {
   try {
-    const newReservation = addNewReservation(req.body);
+    const newReservation = await Reservation.create(req.body);
     
     if (!newReservation) {
       return res.status(500).json({
@@ -114,7 +107,7 @@ router.post('/', validateCreateReservation, handleValidationErrors, (req, res) =
 router.put('/:id', validateID, handleValidationErrors, (req, res) => {
   try {
     const { id } = req.params;
-    const updatedReservation = updateReservation(id, req.body);
+    const updatedReservation = await Reservation.findByIdAndUpdate(id, req.body, { new: true });
     
     if (!updatedReservation) {
       return res.status(404).json({
@@ -142,7 +135,7 @@ router.put('/:id', validateID, handleValidationErrors, (req, res) => {
 router.delete('/:id', validateID, handleValidationErrors, (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = deleteReservation(id);
+    const deleted = await Reservation.findByIdAndDelete(id);
     
     if (!deleted) {
       return res.status(404).json({
