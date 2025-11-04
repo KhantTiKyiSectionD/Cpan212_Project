@@ -9,14 +9,25 @@ export const connectDb = async () => {
     }
 
     await mongoose.connect(uri, {
+      dbName: "BohoBistroRestaurant", 
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
 
     console.log("✅ MongoDB Connected Successfully");
-    
   } catch (error) {
     console.error("❌ MongoDB connection error:", error.message);
     process.exit(1);
   }
 };
+
+export async function connectDB(req, res, next) {
+  try {
+    await mongoose.connect(process.env.MONGO_URI, { dbName: "BohoBistroRestaurant" });
+    console.log("Database Connected");
+    next();
+  } catch (error) {
+    console.log("Database connection failed");
+    console.log(error);
+  }
+}
