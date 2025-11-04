@@ -1,12 +1,5 @@
 import express from 'express';
-import {
-  getAllContacts,
-  getContactByID,
-  addNewContact,
-  updateContact,
-  deleteContact,
-  getContactsByStatus
-} from '../models/contactModel_json_backup.js';
+import Contact from '../models/contactModel.js';
 import {
   validateCreateContact,
   validateID,
@@ -16,9 +9,9 @@ import {
 const router = express.Router();
 
 // GET /api/contacts - Get all contacts
-router.get('/', (req, res) => {
+router.get('/',async (req, res) => {
   try {
-    const contacts = getAllContacts();
+    const contacts = await Contact.find({});
     res.status(200).json({
       success: true,
       data: contacts,
@@ -35,11 +28,11 @@ router.get('/', (req, res) => {
 });
 
 // GET /api/contacts/status/:status - Get contacts by status
-router.get('/status/:status', (req, res) => {
+router.get('/status/:status',  async (req, res) => {
   try {
     const { status } = req.params;
-    const contacts = getContactsByStatus(status);
-    
+   const contacts = await Contact.find({ status });
+
     res.status(200).json({
       success: true,
       data: contacts,
@@ -57,18 +50,18 @@ router.get('/status/:status', (req, res) => {
 });
 
 // GET /api/contacts/:id - Get contact by ID
-router.get('/:id', validateID, handleValidationErrors, (req, res) => {
+router.get('/:id', validateID, handleValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
-    const contact = getContactByID(id);
-    
+   const contact = await Contact.findById(id);
+
     if (!contact) {
       return res.status(404).json({
         success: false,
         message: 'Contact not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       data: contact
@@ -84,17 +77,10 @@ router.get('/:id', validateID, handleValidationErrors, (req, res) => {
 });
 
 // POST /api/contacts - Create new contact
-router.post('/', validateCreateContact, handleValidationErrors, (req, res) => {
+router.post('/', validateCreateContact, handleValidationErrors,  async (req, res) => {
   try {
-    const newContact = addNewContact(req.body);
-    
-    if (!newContact) {
-      return res.status(500).json({
-        success: false,
-        message: 'Error creating contact'
-      });
-    }
-    
+     const newContact = await Contact.create(req.body);
+
     res.status(201).json({
       success: true,
       message: 'Contact message sent successfully',
@@ -111,18 +97,18 @@ router.post('/', validateCreateContact, handleValidationErrors, (req, res) => {
 });
 
 // PUT /api/contacts/:id - Update contact
-router.put('/:id', validateID, handleValidationErrors, (req, res) => {
+router.put('/:id', validateID, handleValidationErrors,  async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedContact = updateContact(id, req.body);
-    
+     const updatedContact = await Contact.findByIdAndUpdate(id, req.body, { new: true });
+
     if (!updatedContact) {
       return res.status(404).json({
         success: false,
         message: 'Contact not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       message: 'Contact updated successfully',
@@ -139,18 +125,18 @@ router.put('/:id', validateID, handleValidationErrors, (req, res) => {
 });
 
 // DELETE /api/contacts/:id - Delete contact
-router.delete('/:id', validateID, handleValidationErrors, (req, res) => {
+router.delete('/:id', validateID, handleValidationErrors,  async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = deleteContact(id);
-    
+     const deleted = await Contact.findByIdAndDelete(id);
+
     if (!deleted) {
       return res.status(404).json({
         success: false,
         message: 'Contact not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       message: 'Contact deleted successfully'
