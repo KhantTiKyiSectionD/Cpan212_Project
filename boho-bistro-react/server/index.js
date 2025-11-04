@@ -2,11 +2,13 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
-import connectDb from './middlewares/connect-db.js';
+import { connectDb } from './middlewares/connect-db.js';
+
 
 
 const app = express();
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
+
 
 // ======================
 // MIDDLEWARES
@@ -19,6 +21,7 @@ app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
+
 
 // ======================
 // ROUTES
