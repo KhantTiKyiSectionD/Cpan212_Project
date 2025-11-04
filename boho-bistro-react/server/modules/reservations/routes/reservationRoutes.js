@@ -1,3 +1,4 @@
+import express from 'express';
 import Reservation from '../models/reservationModel.js';
 
 import {
@@ -9,9 +10,9 @@ import {
 const router = express.Router();
 
 // GET /api/reservations - Get all reservations
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-      const reservations = await Reservation.find({});
+    const reservations = await Reservation.find({});
     res.status(200).json({
       success: true,
       data: reservations,
@@ -27,17 +28,17 @@ router.get('/', (req, res) => {
   }
 });
 
-// GET /api/reservations/date/:date - Get reservations by date
-router.get('/date/:date', (req, res) => {
+// GET /api/reservations/date/:date
+router.get('/date/:date', async (req, res) => {
   try {
     const { date } = req.params;
     const reservations = await Reservation.find({ date });
-    
+
     res.status(200).json({
       success: true,
       data: reservations,
       count: reservations.length,
-      date: date
+      date
     });
   } catch (error) {
     console.error('Error fetching reservations by date:', error);
@@ -49,19 +50,19 @@ router.get('/date/:date', (req, res) => {
   }
 });
 
-// GET /api/reservations/:id - Get reservation by ID
-router.get('/:id', validateID, handleValidationErrors, (req, res) => {
+// GET /api/reservations/:id
+router.get('/:id', validateID, handleValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
     const reservation = await Reservation.findById(id);
-    
+
     if (!reservation) {
       return res.status(404).json({
         success: false,
         message: 'Reservation not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       data: reservation
@@ -76,18 +77,11 @@ router.get('/:id', validateID, handleValidationErrors, (req, res) => {
   }
 });
 
-// POST /api/reservations - Create new reservation
-router.post('/', validateCreateReservation, handleValidationErrors, (req, res) => {
+// POST /api/reservations
+router.post('/', validateCreateReservation, handleValidationErrors, async (req, res) => {
   try {
     const newReservation = await Reservation.create(req.body);
-    
-    if (!newReservation) {
-      return res.status(500).json({
-        success: false,
-        message: 'Error creating reservation'
-      });
-    }
-    
+
     res.status(201).json({
       success: true,
       message: 'Reservation created successfully',
@@ -103,19 +97,19 @@ router.post('/', validateCreateReservation, handleValidationErrors, (req, res) =
   }
 });
 
-// PUT /api/reservations/:id - Update reservation
-router.put('/:id', validateID, handleValidationErrors, (req, res) => {
+// PUT /api/reservations/:id
+router.put('/:id', validateID, handleValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
     const updatedReservation = await Reservation.findByIdAndUpdate(id, req.body, { new: true });
-    
+
     if (!updatedReservation) {
       return res.status(404).json({
         success: false,
         message: 'Reservation not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       message: 'Reservation updated successfully',
@@ -131,19 +125,19 @@ router.put('/:id', validateID, handleValidationErrors, (req, res) => {
   }
 });
 
-// DELETE /api/reservations/:id - Delete reservation
-router.delete('/:id', validateID, handleValidationErrors, (req, res) => {
+// DELETE /api/reservations/:id
+router.delete('/:id', validateID, handleValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
     const deleted = await Reservation.findByIdAndDelete(id);
-    
+
     if (!deleted) {
       return res.status(404).json({
         success: false,
-        message: 'Reservation not found' 
+        message: 'Reservation not found'
       });
     }
-    
+
     res.status(200).json({
       success: true,
       message: 'Reservation deleted successfully'
