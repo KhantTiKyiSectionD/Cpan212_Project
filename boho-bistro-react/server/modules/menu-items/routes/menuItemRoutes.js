@@ -1,13 +1,6 @@
 import express from 'express';
-import {
-  getAllMenuItems,
-  getMenuItemsByCategory,
-  getMenuItemByID,
-  addNewMenuItem,
-  updateExistingMenuItem,
-  deleteMenuItem,
-  getFilteredMenuItems
-} from '../models/menuItemModel_json_backup.js';
+import MenuItem from '../models/menuItemModel.js';
+
 import {
   validateCreateMenuItem,
   validateUpdateMenuItem,
@@ -18,28 +11,27 @@ import {
 const router = express.Router();
 
 // GET /api/menu-items - Get all menu items
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
-    // Check if any filters are provided
-    const { category, vegetarian, vegan, glutenFree } = req.query;
+    const { category, search, page = 1, limit = 10, sort } = req.query;
+    const query = {};
+    if (category) query.category = category;
+    if (search) query.name = { $regex: search, $options: 'i' };
+
+    const items = await MenuItem.find(query)
+  .sort(sort || '')
+  .skip((page - 1) * limit)
+  .limit(Number(limit));
+
+  const total = await MenuItem.countDocuments(query);
     
-    let items;
-    if (category || vegetarian !== undefined || vegan !== undefined || glutenFree !== undefined) {
-      const filters = {};
-      if (category) filters.category = category;
-      if (vegetarian !== undefined) filters.isVegetarian = vegetarian === 'true';
-      if (vegan !== undefined) filters.isVegan = vegan === 'true';
-      if (glutenFree !== undefined) filters.isGlutenFree = glutenFree === 'true';
-      
-      items = getFilteredMenuItems(filters);
-    } else {
-      items = getAllMenuItems();
-    }
-    
-    res.status(200).json({
+      res.status(200).json({
       success: true,
       data: items,
-      count: items.length
+      count: items.length,
+      total,
+      currentPage: Number(page)
+
     });
   } catch (error) {
     console.error('Error fetching menu items:', error);
@@ -52,10 +44,11 @@ router.get('/', (req, res) => {
 });
 
 // GET /api/menu-items/category/:category - Get menu items by category
-router.get('/category/:category', (req, res) => {
+router.get('/category/:category', async (req, res) => {
   try {
     const { category } = req.params;
-    const items = getMenuItemsByCategory(category);
+    const items = await MenuItem.find({ category });
+
     
     res.status(200).json({
       success: true,
@@ -74,10 +67,11 @@ router.get('/category/:category', (req, res) => {
 });
 
 // GET /api/menu-items/:id - Get menu item by ID
-router.get('/:id', validateID, handleValidationErrors, (req, res) => {
+router.get('/:id', validateID, handleValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
-    const item = getMenuItemByID(id);
+    const item = await MenuItem.findById(id);
+
     
     if (!item) {
       return res.status(404).json({
@@ -101,9 +95,9 @@ router.get('/:id', validateID, handleValidationErrors, (req, res) => {
 });
 
 // POST /api/menu-items - Create new menu item
-router.post('/', validateCreateMenuItem, handleValidationErrors, (req, res) => {
+router.post('/', validateCreateMenuItem, handleValidationErrors, async (req, res) => {
   try {
-    const newItem = addNewMenuItem(req.body);
+    const newItem = await MenuItem.create(req.body);
     
     if (!newItem) {
       return res.status(500).json({
@@ -128,10 +122,11 @@ router.post('/', validateCreateMenuItem, handleValidationErrors, (req, res) => {
 });
 
 // PUT /api/menu-items/:id - Update menu item
-router.put('/:id', validateUpdateMenuItem, handleValidationErrors, (req, res) => {
+router.put('/:id', validateUpdateMenuItem, handleValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedItem = updateExistingMenuItem(id, req.body);
+    const updatedItem = await MenuItem.findByIdAndUpdate(id, req.body, { new: true });
+
     
     if (!updatedItem) {
       return res.status(404).json({
@@ -156,10 +151,10 @@ router.put('/:id', validateUpdateMenuItem, handleValidationErrors, (req, res) =>
 });
 
 // DELETE /api/menu-items/:id - Delete menu item
-router.delete('/:id', validateID, handleValidationErrors, (req, res) => {
+router.delete('/:id', validateID, handleValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
-    const deleted = deleteMenuItem(id);
+    const deleted = await MenuItem.findByIdAndDelete(id);
     
     if (!deleted) {
       return res.status(404).json({
