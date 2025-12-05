@@ -7,6 +7,7 @@ dotenv.config();
 import { connectDb } from './middlewares/connect-db.js';
 import { testEmailConnection } from './utils/emailService.js';
 
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -64,6 +65,15 @@ try {
   console.error('❌ Error loading contact routes:', error.message);
 }
 
+//Import and use auth routes
+try {
+  const { default: authRoutes } = await import('./modules/users/routes/authRoutes.js');
+  app.use('/api/auth', authRoutes);
+  console.log('✅ Auth routes loaded successfully');
+} catch (error) {
+  console.error('❌ Error loading auth routes:', error.message);
+}
+
 // Root route
 app.get('/', (req, res) => {
   res.json({ 
@@ -108,6 +118,12 @@ app.use((error, req, res, next) => {
 connectDb().then(async () => {
   console.log(`✅ MongoDB Connected to database: ${process.env.DB_NAME || 'BohoBistroRestaurant'}`);
   
+  // Check for JWT secret (important for auth)
+  if (!process.env.JWT_SECRET) {
+    console.warn('⚠️  JWT_SECRET not set in .env file. Using default for development.');
+    process.env.JWT_SECRET = 'dev-secret-key-change-this-in-production';
+  }
+  
   // Test email connection on startup
   if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
     console.log('🔄 Testing email connection...');
@@ -119,6 +135,7 @@ connectDb().then(async () => {
   app.listen(PORT, () => {
     console.log(`🚀 Server started on http://localhost:${PORT}`);
     console.log(`📧 Email service: ${process.env.EMAIL_USER ? 'Configured' : 'Not configured'}`);
+    console.log(`🔐 JWT auth: ${process.env.JWT_SECRET ? 'Configured' : 'Using default'}`);
   });
 }).catch((error) => {
   console.error('❌ Failed to connect to database:', error);

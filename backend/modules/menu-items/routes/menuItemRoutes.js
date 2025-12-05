@@ -6,11 +6,12 @@ import {
   validateMenuItemID,
   handleMenuItemValidationErrors
 } from '../middlewares/menuItemValidation.js';
+import { optionalAuthenticate } from '../../../middlewares/optionalAuth.js'; // ADD THIS
 
 const router = express.Router();
 
-// GET /api/menu-items - Get all menu items with filtering
-router.get('/', async (req, res) => {
+// GET /api/menu-items - Get all menu items with filtering (PUBLIC)
+router.get('/', optionalAuthenticate, async (req, res) => {
   try {
     const { category, search, page = 1, limit = 10, sort } = req.query;
     const query = {};
@@ -37,7 +38,9 @@ router.get('/', async (req, res) => {
       count: items.length,
       total,
       currentPage: Number(page),
-      totalPages: Math.ceil(total / limit)
+      totalPages: Math.ceil(total / limit),
+      // Optional: include user info if logged in (for analytics/tracking)
+      user: req.user ? { id: req.user._id, role: req.user.role } : null
     });
   } catch (error) {
     console.error('Error fetching menu items:', error);
@@ -49,8 +52,8 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /api/menu-items/category/:category - Get menu items by category
-router.get('/category/:category', async (req, res) => {
+// GET /api/menu-items/category/:category - Get menu items by category (PUBLIC)
+router.get('/category/:category', optionalAuthenticate, async (req, res) => {
   try {
     const { category } = req.params;
     const items = await MenuItem.find({ category });
@@ -71,8 +74,8 @@ router.get('/category/:category', async (req, res) => {
   }
 });
 
-// GET /api/menu-items/:id - Get menu item by ID
-router.get('/:id', validateMenuItemID, handleMenuItemValidationErrors, async (req, res) => {
+// GET /api/menu-items/:id - Get menu item by ID (PUBLIC)
+router.get('/:id', optionalAuthenticate, validateMenuItemID, handleMenuItemValidationErrors, async (req, res) => {
   try {
     const { id } = req.params;
     const item = await MenuItem.findById(id);
@@ -98,9 +101,17 @@ router.get('/:id', validateMenuItemID, handleMenuItemValidationErrors, async (re
   }
 });
 
-// POST /api/menu-items - Create new menu item
-router.post('/', validateCreateMenuItem, handleMenuItemValidationErrors, async (req, res) => {
+// POST /api/menu-items - Create new menu item (ADMIN ONLY - protect later)
+router.post('/', optionalAuthenticate, validateCreateMenuItem, handleMenuItemValidationErrors, async (req, res) => {
   try {
+    // TODO: Add admin authorization when ready
+    // if (!req.user || req.user.role !== 'admin') {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: 'Admin access required'
+    //   });
+    // }
+    
     const newItem = await MenuItem.create(req.body);
     
     res.status(201).json({
@@ -118,9 +129,17 @@ router.post('/', validateCreateMenuItem, handleMenuItemValidationErrors, async (
   }
 });
 
-// PUT /api/menu-items/:id - Update menu item
-router.put('/:id', validateUpdateMenuItem, handleMenuItemValidationErrors, async (req, res) => {
+// PUT /api/menu-items/:id - Update menu item (ADMIN ONLY - protect later)
+router.put('/:id', optionalAuthenticate, validateUpdateMenuItem, handleMenuItemValidationErrors, async (req, res) => {
   try {
+    // TODO: Add admin authorization when ready
+    // if (!req.user || req.user.role !== 'admin') {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: 'Admin access required'
+    //   });
+    // }
+    
     const { id } = req.params;
     const updatedItem = await MenuItem.findByIdAndUpdate(
       id, 
@@ -150,9 +169,17 @@ router.put('/:id', validateUpdateMenuItem, handleMenuItemValidationErrors, async
   }
 });
 
-// DELETE /api/menu-items/:id - Delete menu item
-router.delete('/:id', validateMenuItemID, handleMenuItemValidationErrors, async (req, res) => {
+// DELETE /api/menu-items/:id - Delete menu item (ADMIN ONLY - protect later)
+router.delete('/:id', optionalAuthenticate, validateMenuItemID, handleMenuItemValidationErrors, async (req, res) => {
   try {
+    // TODO: Add admin authorization when ready
+    // if (!req.user || req.user.role !== 'admin') {
+    //   return res.status(403).json({
+    //     success: false,
+    //     message: 'Admin access required'
+    //   });
+    // }
+    
     const { id } = req.params;
     const deleted = await MenuItem.findByIdAndDelete(id);
     
